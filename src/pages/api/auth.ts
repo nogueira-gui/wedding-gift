@@ -10,7 +10,7 @@ const auth = getAuth(firebaseApp);
 
 // Função de login com e-mail e senha
 export const signInWithEmailAndPassword = async (email: string, password: string) => {
-  await signInWithEmailAndPassword(auth, email, password);
+//   await signInWithEmailAndPassword(auth, email, password);
 };
 
 // Função de login com Google
