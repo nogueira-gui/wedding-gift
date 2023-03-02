@@ -2,14 +2,18 @@ import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
   // Aqui devem ser inseridas as credenciais do projeto Firebase
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId
 };
 
-// Inicializa o app do Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-export default firebaseApp;
+// Retorna uma nova instância do Firebase
+const getFirebaseApp = () => {
+  const app = initializeApp(firebaseConfig);
+  return app;
+};
+
+export default getFirebaseApp;
