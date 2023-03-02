@@ -1,5 +1,5 @@
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
-import firebaseApp from '../config/firebase';
+import firebaseApp from '../../config/firebase';
 
 // Cria as instâncias dos provedores de autenticação do Google e Facebook
 const googleProvider = new GoogleAuthProvider();
