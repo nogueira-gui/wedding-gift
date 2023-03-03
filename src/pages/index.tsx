@@ -50,24 +50,16 @@ export default function Home() {
       {user ? (
         <p>Bem-vindo, {user}!</p>
       ) : (
-        <>
-          <h1>Login</h1>
-          <form onSubmit={handleFormSubmit}>
-            <label>
-              E-mail:
-              <input type="email" value={email} onChange={handleEmailChange} />
-            </label>
-            <label>
-              Password:
-              <input type="password" value={password} onChange={handlePasswordChange} />
-            </label>
-            <button type="submit">Sign in</button>
-          </form>
+        <div style={{ backgroundColor: '#444', display: 'flex', flexDirection: 'column', alignItems: 'center' ,padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)' }}>
           <div>
+            <h1>Acesso</h1>
+            <img src="icon.png" alt="Presente Icon" style={{ width: '100px', height: '100px', borderRadius: '50%', marginBottom: '20px' }} />
+          </div>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
             <button onClick={handleGoogleLogin}>Sign in with Google</button>
             <button onClick={handleFacebookLogin}>Sign in with Facebook</button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
