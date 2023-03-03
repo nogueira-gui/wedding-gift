@@ -30,7 +30,7 @@ export default function Home() {
 
   const handleFacebookLogin = async () => {
     try {
-      await signInWithFacebook(); // Chama a função de login com Facebook
+      setUser(await signInWithFacebook());// Chama a função de login com Facebook
     } catch (error) {
       console.error(error);
     }
