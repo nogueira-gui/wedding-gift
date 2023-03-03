@@ -22,5 +22,6 @@ export const signInWithGoogle = async () => {
 
 // Função de login com Facebook
 export const signInWithFacebook = async () => {
-  await signInWithPopup(auth, facebookProvider);
+  const result = await signInWithPopup(auth, facebookProvider);
+  console.log(result)
 };
