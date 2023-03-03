@@ -50,7 +50,7 @@ export default function Home() {
       {user ? (
         <p>Bem-vindo, {user}!</p>
       ) : (
-        <div style={{ backgroundColor: '#444', display: 'flex', flexDirection: 'column', alignItems: 'center' ,padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)' }}>
+        <div style={{ backgroundColor: '#444', display: 'flex', flexDirection: 'column', alignItems: 'center' ,padding: '20px', margin:'0px 25px 0px 25px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)' }}>
           <div>
             <h1>Acesso</h1>
             <img src="icon.png" alt="Presente Icon" style={{ width: '100px', height: '100px', borderRadius: '50%', marginBottom: '20px' }} />
