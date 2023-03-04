@@ -99,7 +99,8 @@ export default function Home() {
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
-            overflow: 'hidden',
+            overflow: 'scroll',
+            overflowX: 'hidden',
             width:'100vw',
             maxHeight: '80vh',
             justifyContent: 'center'
