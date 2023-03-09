@@ -59,34 +59,6 @@ export default function Home() {
     description: "Descrição do Item 2",
     quantity: 1,
     selected: false
-  },
-  {
-    image: "https://picsum.photos/id/30/200/300",
-    title: "Item 1",
-    description: "Descrição do Item 1",
-    quantity: 5,
-    selected: true
-  },
-  {
-    image: "https://picsum.photos/id/50/200/300",
-    title: "Item 2",
-    description: "Descrição do Item 2",
-    quantity: 1,
-    selected: false
-  },
-  {
-    image: "https://picsum.photos/id/60/200/300",
-    title: "Item 3",
-    description: "Descrição do Item 2",
-    quantity: 1,
-    selected: false
-  },
-  {
-    image: "https://picsum.photos/id/70/200/300",
-    title: "Item 4",
-    description: "Descrição do Item 2",
-    quantity: 1,
-    selected: false
   }
   ];
 
