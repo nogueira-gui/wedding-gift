@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, UserCredential } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, UserCredential, browserSessionPersistence, setPersistence } from 'firebase/auth';
 import getFirebaseApp from '../../config/firebase';
 
 import {addUser} from '../api/users';
@@ -9,6 +9,9 @@ const facebookProvider = new FacebookAuthProvider();
 
 // Cria a instância do objeto de autenticação do Firebase
 const auth = getAuth(getFirebaseApp());
+
+// Define a persistência da sessão como localStorage
+setPersistence(auth, browserSessionPersistence);
 
 // Função de login com e-mail e senha
 export const signInWithEmailAndPassword = async (email: string, password: string) => {
@@ -21,14 +24,14 @@ export const signInWithGoogle = async () => {
   const result = await signInWithPopup(auth, googleProvider);
   console.log(result);
   addSocialLoginUser(result);
-  return result.user.displayName;
+  return result.user;
 };
 
 // Função de login com Facebook
 export const signInWithFacebook = async () => {
   const result = await signInWithPopup(auth, facebookProvider);
   addSocialLoginUser(result);
-  return result.user.displayName;
+  return result.user;
 };
 
 const addSocialLoginUser = (result: UserCredential) : void => {

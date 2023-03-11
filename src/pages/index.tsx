@@ -1,13 +1,23 @@
 import ItemCard from '@/component/itemCard';
+import getFirebaseApp from '@/config/firebase';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { signInWithGoogle, signInWithFacebook } from '../pages/api/auth'; // Importa funções de autenticação do Firebase
 
 export default function Home() {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-
-  }, [user]);
+      const auth = getAuth(getFirebaseApp());
+      onAuthStateChanged(auth, (userLogged) => {
+      if (sessionStorage.getItem(`firebase:authUser:${process.env.apiKey}:[DEFAULT]`)) {
+        // router.push('/main');
+        setUser(userLogged);
+      }
+    });
+  }, []);
 
   const handleGoogleLogin = async () => {
     try {
@@ -67,7 +77,7 @@ export default function Home() {
     <div>
       {user ? (
         <>
-          <p>Bem-vindo, {user}!</p>
+          <p>Bem-vindo, {user.displayName}!</p>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -96,8 +106,8 @@ export default function Home() {
             <img src="icon.png" alt="Presente Icon" style={{ width: '100px', height: '100px', borderRadius: '50%', marginBottom: '20px' }} />
           </div>
           <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-            <button onClick={handleGoogleLogin}>Sign in with Google</button>
-            <button onClick={handleFacebookLogin}>Sign in with Facebook</button>
+            <button onClick={handleGoogleLogin}>Entrar com Google</button>
+            <button onClick={handleFacebookLogin}>Entrar com Facebook</button>
           </div>
         </div>
       )
