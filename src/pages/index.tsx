@@ -55,7 +55,7 @@ export default function Home() {
       {user ? (
         <>
         <div>
-          <h2>Bem-vindo, {user.displayName}!</h2>
+          <h2>Olá {user.displayName}, seja bem vindo(a) a lista de casamento Grace e Marco!</h2>
         </div>
           <div style={{
             display: 'flex',
