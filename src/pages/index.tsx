@@ -4,10 +4,12 @@ import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { signInWithGoogle, signInWithFacebook } from '../pages/api/auth'; // Importa funções de autenticação do Firebase
+import { getItemsFirebase } from './api/item';
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const [items, setItems] = useState<any>([]);
 
   useEffect(() => {
       const auth = getAuth(getFirebaseApp());
@@ -15,6 +17,7 @@ export default function Home() {
       if (sessionStorage.getItem(`firebase:authUser:${process.env.apiKey}:[DEFAULT]`)) {
         // router.push('/main');
         setUser(userLogged);
+        getItems();
       }
     });
   }, []);
@@ -35,49 +38,25 @@ export default function Home() {
     }
   };
 
-  const items = [{
-    image: "https://picsum.photos/id/237/200/300",
-    title: "Dog",
-    description: "Cachorrinho pretinho bonito",
-    quantity: 1,
-    selected: false
-  },
-  {
-    image: "https://picsum.photos/id/2/200/300",
-    title: "Item 1",
-    description: "Descrição do Item 1",
-    quantity: 5,
-    selected: true
-  },
-  {
-    image: "https://picsum.photos/id/20/200/300",
-    title: "Item 2",
-    description: "Descrição do Item 2",
-    quantity: 1,
-    selected: false
-  },
-  {
-    image: "https://picsum.photos/id/21/200/300",
-    title: "Item 3",
-    description: "Descrição do Item 2",
-    quantity: 1,
-    selected: false
-  },
-  {
-    image: "https://picsum.photos/id/25/200/300",
-    title: "Item 4",
-    description: "Descrição do Item 2",
-    quantity: 1,
-    selected: false
+  const getItems = async () => {
+    try {
+      let result = await getItemsFirebase();
+      if (result != null) {
+        console.log(result);
+        setItems(result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
-  ];
-
 
   return (
     <div>
       {user ? (
         <>
-          <p>Bem-vindo, {user.displayName}!</p>
+        <div>
+          <h2>Bem-vindo, {user.displayName}!</h2>
+        </div>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -87,7 +66,7 @@ export default function Home() {
             maxHeight: '80vh',
             justifyContent: 'center'
           }}>
-            {items.map((item) => (
+            {items.map((item:any) => (
               <ItemCard
                 key={item.title}
                 image={item.image}
