@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 
 interface ItemCardProps {
   image: string;
@@ -13,10 +13,11 @@ export default function ItemCard({
   title,
   description,
   quantity,
-  selected = false
+  selected=false
 }: PropsWithChildren<ItemCardProps>) {
+  const [selectedItem,setSelected] = useState<boolean>(selected);
   return (
-    <div className={`item-card ${selected ? "selected" : ""}`}>
+    <div onClick={()=>{setSelected(!selectedItem)}} className={`item-card ${selectedItem ? "selected" : ""}`}>
       <div className="image-wrapper">
         <img src={image} alt={title} />
       </div>

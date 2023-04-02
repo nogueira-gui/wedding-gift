@@ -68,9 +68,9 @@ export default function Home() {
             maxHeight: '80vh',
             justifyContent: 'center'
           }}>
-            {items.map((item:any) => (
+            {items.map((item:any, index:any) => (
               <ItemCard
-                key={item.title}
+                key={index}
                 image={item.image}
                 title={item.title}
                 description={item.description}
