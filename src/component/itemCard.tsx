@@ -17,7 +17,7 @@ export default function ItemCard({
 }: PropsWithChildren<ItemCardProps>) {
   const [selectedItem,setSelected] = useState<boolean>(selected);
   return (
-    <div onClick={()=>{setSelected(!selectedItem)}} className={`item-card ${selectedItem ? "selected" : ""}`}>
+    <div onTouchEnd={()=>setSelected(!selectedItem)} className={`item-card ${selectedItem ? "selected" : ""}`}>
       <div className="image-wrapper">
         <img src={image} alt={title} />
       </div>
