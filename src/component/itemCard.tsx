@@ -23,7 +23,7 @@ export default function ItemCard({
       <div className="content">
         <h2>{title}</h2>
         <p>{description}</p>
-        <span>Quantity: {quantity}</span>
+        <span>Quantidade: {quantity}</span>
       </div>
     </div>
   );

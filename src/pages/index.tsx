@@ -17,10 +17,12 @@ export default function Home() {
       if (sessionStorage.getItem(`firebase:authUser:${process.env.apiKey}:[DEFAULT]`)) {
         // router.push('/main');
         setUser(userLogged);
-        getItems();
       }
     });
-  }, []);
+    if (user) {
+      getItems();
+    }
+  }, [user]);
 
   const handleGoogleLogin = async () => {
     try {
