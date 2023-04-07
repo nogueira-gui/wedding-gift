@@ -175,7 +175,7 @@ div button:last-child {
 }
 
 .item-card.selected {
-  border-color: green;
+  border: 2px solid green;
 }
 
 .image-wrapper {

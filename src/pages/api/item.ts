@@ -7,7 +7,9 @@ export const getItemsFirebase = async () => {
         const querySnapshot = await getDocs(q);
         const items : DocumentData[] = [];
         querySnapshot.forEach((doc) => {
-            items.push(doc.data());
+            const item = doc.data();
+            item.id = doc.id;
+            items.push(item);
         });
         return items;
     } catch (err) {

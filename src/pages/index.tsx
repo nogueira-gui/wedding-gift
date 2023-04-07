@@ -1,3 +1,4 @@
+import Header from '@/component/Header';
 import ItemCard from '@/component/itemCard';
 import getFirebaseApp from '@/config/firebase';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
@@ -10,6 +11,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const [items, setItems] = useState<any>([]);
+  const [selectedItems, setSelectedItems] = useState<any>([]);
 
   useEffect(() => {
       const auth = getAuth(getFirebaseApp());
@@ -22,7 +24,7 @@ export default function Home() {
     if (user) {
       getItems();
     }
-  }, [user]);
+  }, [user, selectedItems]);
 
   const handleGoogleLogin = async () => {
     try {
@@ -52,13 +54,25 @@ export default function Home() {
     }
   }
 
+  const handleSelectedItem = (childKey:any, selected: boolean) => {
+    console.log("Item Id: ",childKey, "\nSelecionado?: ", selected, " \nPelo usuario: ", user?.uid);
+    let items = selectedItems;
+    if (selected) {
+      items.push(childKey);
+      setSelectedItems(items);
+    } else {
+      items.pop(childKey);
+      setSelectedItems(items);
+    }
+  }
+
   return (
     <div>
       {user ? (
         <>
-        <div>
-          <h2>Olá {user.displayName}, seja bem vindo(a) a lista de casamento Grace e Marco!</h2>
-        </div>
+        
+          <Header displayName={user.displayName}/>
+
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -71,11 +85,13 @@ export default function Home() {
             {items.map((item:any, index:any) => (
               <ItemCard
                 key={index}
+                id={item.id}
                 image={item.image}
                 title={item.title}
                 description={item.description}
                 quantity={item.quantity}
                 selected={item.selected}
+                handleSelectedItem={handleSelectedItem}
               />
             ))}
           </div>
