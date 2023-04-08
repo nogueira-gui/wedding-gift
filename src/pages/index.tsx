@@ -14,8 +14,8 @@ export default function Home() {
   const [selectedItems, setSelectedItems] = useState<any>([]);
 
   useEffect(() => {
-      const auth = getAuth(getFirebaseApp());
-      onAuthStateChanged(auth, (userLogged) => {
+    const auth = getAuth(getFirebaseApp());
+    onAuthStateChanged(auth, (userLogged) => {
       if (sessionStorage.getItem(`firebase:authUser:${process.env.apiKey}:[DEFAULT]`)) {
         // router.push('/main');
         setUser(userLogged);
@@ -54,7 +54,7 @@ export default function Home() {
     }
   }
 
-  const handleSelectedItem = (childItem:any, selected: boolean) => {
+  const handleSelectedItem = (childItem: any, selected: boolean) => {
     let items = selectedItems;
     if (selected) {
       items.push(childItem);
@@ -63,7 +63,7 @@ export default function Home() {
       items.pop(childItem);
       setSelectedItems(items);
     }
-    childItem.selected= selected;
+    childItem.selected = selected;
     updateItemFirebase(childItem, user?.uid);
   }
 
@@ -71,19 +71,23 @@ export default function Home() {
     <div>
       {user ? (
         <>
-        
-          <Header displayName={user.displayName}/>
+
+          <Header user={user} />
 
           <div style={{
+            position: 'absolute',
+            top: '5rem', // ajuste o tamanho do header de acordo com a sua aplicação
+            left: 0,
+            right: 0,
             display: 'flex',
             flexWrap: 'wrap',
             overflow: 'scroll',
             overflowX: 'hidden',
-            width:'100vw',
-            maxHeight: '80vh',
+            width: '100vw',
+            maxHeight: '87vh',
             justifyContent: 'center'
           }}>
-            {items.map((item:any, index:any) => (
+            {items.map((item: any, index: any) => (
               <ItemCard
                 key={index}
                 id={item.id}
