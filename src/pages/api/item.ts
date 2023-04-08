@@ -34,16 +34,27 @@ export const updateItemFirebase = async (item: any, userId: any) => {
       }
   
       const itemData = itemSnapshot.data();
+      if (itemData == undefined || itemData == null) {
+        console.error('Item selected does not exist on firebase');
+        return;
+      }
+      //Verifica se o userId é o mesmo registrado no item e se está selecionado no firestore
       if (itemData && itemData.userId === userId && itemData.selected) {
         // remove userId if it already exists and matches the given userId
         newItem.userId="";
-      } else {
+      } else if (!itemData.selected) {
         // add userId if it doesn't exist or if it exists but doesn't match the given userId
         newItem.userId = userId;
       }
-      console.log(newItem)
-      await updateDoc(itemRef, newItem);
-      console.log('Item updated successfully');
+      //Atualiza somente se houver alteração no userId, caso não força atualização
+      if (item.userId != newItem.userId) {
+          await updateDoc(itemRef, newItem);
+          console.log('Item updated successfully');
+      } else {
+        window.alert('O item já foi selecionado por outro usuário!');
+        window.location.reload();
+        console.log("Page needed to refresh")
+      }
     } catch (err) {
       console.error("An error occurred while updating the item: ", err)
       throw err;
