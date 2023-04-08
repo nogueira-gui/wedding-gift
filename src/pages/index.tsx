@@ -92,6 +92,7 @@ export default function Home() {
                 description={item.description}
                 quantity={item.quantity}
                 selected={item.selected}
+                bookedByAnotherUser={item.userId != user.uid && (item.userId && item.userId != "")}
                 handleSelectedItem={handleSelectedItem}
               />
             ))}

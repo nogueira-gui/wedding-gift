@@ -7,6 +7,7 @@ interface ItemCardProps {
   description: string;
   quantity: number;
   selected?: boolean;
+  bookedByAnotherUser?: boolean;
   handleSelectedItem: Function;
 }
 
@@ -17,6 +18,7 @@ export default function ItemCard({
   description,
   quantity,
   selected = false,
+  bookedByAnotherUser,
   handleSelectedItem
 }: PropsWithChildren<ItemCardProps>) {
   const [selectedItem, setSelected] = useState<boolean>(selected);
@@ -34,7 +36,7 @@ export default function ItemCard({
       <div className="content">
         <h2>{title}</h2>
         <p>{description}</p>
-        <button onClick={() => handlerSelection()} /*disabled={selectedItem}*/ 
+        <button onClick={() => handlerSelection()} disabled={bookedByAnotherUser} 
         style={selectedItem ? {backgroundColor:"red"} : {}} >
           {selectedItem ? "Reservado" : "Presentear"}</button>
       </div>
