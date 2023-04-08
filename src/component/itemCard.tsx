@@ -22,7 +22,7 @@ export default function ItemCard({
   const [selectedItem, setSelected] = useState<boolean>(selected);
 
   const handlerSelection = () => {
-    handleSelectedItem(id, !selectedItem);
+    handleSelectedItem({id,image,title,description,quantity,selected}, !selectedItem);
     setSelected(!selectedItem);
   }
 
@@ -36,7 +36,7 @@ export default function ItemCard({
         <p>{description}</p>
         <button onClick={() => handlerSelection()} /*disabled={selectedItem}*/ 
         style={selectedItem ? {backgroundColor:"red"} : {}} >
-          {selectedItem ? "Presenteado" : "Presentear"}</button>
+          {selectedItem ? "Reservado" : "Presentear"}</button>
       </div>
     </div>
   );

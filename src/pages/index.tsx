@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { signInWithGoogle, signInWithFacebook } from '../pages/api/auth'; // Importa funções de autenticação do Firebase
-import { getItemsFirebase } from './api/item';
+import { getItemsFirebase, updateItemFirebase } from './api/item';
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
@@ -54,16 +54,17 @@ export default function Home() {
     }
   }
 
-  const handleSelectedItem = (childKey:any, selected: boolean) => {
-    console.log("Item Id: ",childKey, "\nSelecionado?: ", selected, " \nPelo usuario: ", user?.uid);
+  const handleSelectedItem = (childItem:any, selected: boolean) => {
     let items = selectedItems;
     if (selected) {
-      items.push(childKey);
+      items.push(childItem);
       setSelectedItems(items);
     } else {
-      items.pop(childKey);
+      items.pop(childItem);
       setSelectedItems(items);
     }
+    childItem.selected= selected;
+    updateItemFirebase(childItem, user?.uid);
   }
 
   return (
