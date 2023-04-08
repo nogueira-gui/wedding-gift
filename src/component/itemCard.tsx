@@ -29,7 +29,7 @@ export default function ItemCard({
   }
 
   return (
-    <div className={`item-card ${selectedItem ? "selected" : ""}`}>
+    <div className={`item-card ${selectedItem && !bookedByAnotherUser ? "selected" : ""}`}>
       <div className="image-wrapper">
         <img src={image} alt={title} />
       </div>
@@ -37,8 +37,8 @@ export default function ItemCard({
         <h2>{title}</h2>
         <p>{description}</p>
         <button onClick={() => handlerSelection()} disabled={bookedByAnotherUser} 
-        style={selectedItem ? {backgroundColor:"red"} : {}} >
-          {selectedItem ? "Reservado" : "Presentear"}</button>
+        style={bookedByAnotherUser ? {backgroundColor:"grey"} : selectedItem ? {backgroundColor:"red"} : {}} >
+          {bookedByAnotherUser ? "Indisponível" : selectedItem ? "Reservado" : "Presentear"}</button>
       </div>
     </div>
   );
