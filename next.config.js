@@ -12,7 +12,7 @@ const nextConfig = {
     appId: process.env.APP_ID
   },
   images: {
-    domains: ['lh3.googleusercontent.com']
+    domains: ['lh3.googleusercontent.com', 'graph.facebook.com']
   }
 }
 
