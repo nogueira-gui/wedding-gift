@@ -105,7 +105,7 @@ export default function Home() {
       ) : (
         <div style={{ backgroundColor: '#444', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', margin: '0px 25px 0px 25px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)' }}>
           <div>
-            <h1>Acesso</h1>
+            <h1 style={{ color: "white"}}>Acesso</h1>
             <img src="icon.png" alt="Presente Icon" style={{ width: '100px', height: '100px', borderRadius: '50%', marginBottom: '20px' }} />
           </div>
           <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
